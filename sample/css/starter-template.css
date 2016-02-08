@@ -1,0 +1,12 @@
+body {
+    padding-top: 50px;
+}
+.starter-template {
+    padding: 40px 15px;
+    /*text-align: center;*/
+}
+
+.product {
+    border: 1px #eaeaea solid;
+    margin:20px;
+}
