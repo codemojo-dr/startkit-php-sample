@@ -50,7 +50,7 @@ if(count($_POST) > 0) {
     $(function(){
         $('#loginForm').submit(function(e){
             e.preventDefault();
-            $.post('/sample/ajax-endpoints/login.php', {email: $('#inputEmail').val()}, function(data){
+            $.post('ajax-endpoints/login.php', {email: $('#inputEmail').val()}, function(data){
                 if(data.code == 200){
                     location.href = "index.php";
                 }else{

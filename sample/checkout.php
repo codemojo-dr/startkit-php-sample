@@ -60,11 +60,11 @@ if(count($_POST) > 0){
         /*
          * Discounted price
          */
-        $checkout_price = $checkout_price - $redeem;
+        $discounted_price = $checkout_price - $redeem;
 
         unset($_SESSION['cart']);
 
-        die("Success! Redeemed {$redeem} Rs from wallet. You will be doing the payment stuffs here for {$checkout_price} Rs instead of " . calculateCartPrice() . " Rs ...");
+        die("Success! Redeemed {$redeem} Rs from wallet. You will be doing the payment stuffs here for {$discounted_price} Rs instead of " . $checkout_price . " Rs ...");
     }else{
         /*
          * User has choosen not to redeem, so lets add cashback

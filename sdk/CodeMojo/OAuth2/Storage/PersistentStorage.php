@@ -22,7 +22,7 @@ class PersistentStorage {
      */
     public function __construct()
     {
-        $this->path = sys_get_temp_dir() . sha1("/drewards_oauth_token.json");
+        $this->path = sys_get_temp_dir() . "/" . sha1("drewards_oauth_token.json");
         if(file_exists($this->path)) {
             $this->data = json_decode(base64_decode(file_get_contents($this->path)), true);
         }
@@ -57,8 +57,8 @@ class PersistentStorage {
      */
     public function accessTokenMightHaveExpired($id, $secret){
         return !isset($this->data['oauth2_expiry']) || time() > $this->data['oauth2_expiry'] ||
-        !isset($this->data['affinity']) ||
-        sha1($id . $secret . $this->data['oauth2_access_token'] . $this->data['oauth2_expiry']) != $this->data['affinity'];
+        !isset($this->data['affinity']) || sha1($id . $secret . $this->data['oauth2_access_token'] . $this->data['oauth2_expiry'])
+        != $this->data['affinity'];
     }
 
 

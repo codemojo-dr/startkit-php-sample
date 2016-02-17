@@ -15,6 +15,7 @@
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li><a id="items-count" href="checkout.php">0 items</a></li>
+                <li><a href="transactions.php">Wallet Transactions</a></li>
                 <li><a href="account.php">My Account</a></li>
             </ul>
         </div>

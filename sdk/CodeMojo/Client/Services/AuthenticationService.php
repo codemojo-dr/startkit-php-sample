@@ -59,15 +59,16 @@ class AuthenticationService extends BaseService
      */
     public function __construct($client_id, $client_secret, $environment = Endpoints::SANDBOX, $callback = null)
     {
-        $this->callback = $callback;
         $this->client_id = $client_id;
         $this->client_secret = $client_secret;
         $this->storage = new PersistentStorage();
+        if(empty($environment)){$environment = Endpoints::SANDBOX;}
         $this->setEnvironment($environment);
         if($this->storage->accessTokenMightHaveExpired($client_id, $client_secret)) {
             $this->reauthenticate();
         }
         $this->transport = new HttpGuzzle($this->storage->getAccessToken(), $this);
+        $this->callback = $callback;
     }
 
     /**
@@ -91,7 +92,7 @@ class AuthenticationService extends BaseService
         if($this->callback) {
             call_user_func_array($this->callback,array(0x06,"api request quota exceeded"));
             return;
-        } elseif($this->environment == Endpoints::LOCAL) {
+        }elseif($this->environment == Endpoints::LOCAL) {
             parent::onQuotaExceeded();
         }
     }
@@ -110,7 +111,7 @@ class AuthenticationService extends BaseService
             if ($this->callback) {
                 call_user_func_array($this->callback, array(0x05, 'token validation failed'));
                 return;
-            } elseif ($this->environment == Endpoints::LOCAL) {
+            }elseif($this->environment == Endpoints::LOCAL) {
                 parent::onTokenFailure();
             }
 
@@ -161,7 +162,6 @@ class AuthenticationService extends BaseService
     {
         $client = new \CodeMojo\OAuth2\Client($this->client_id, $this->client_secret);
         $result = $client->getAccessToken($this->getServerEndPoint() . Endpoints::ACCESS_TOKEN,'client_credentials',array());
-
         if($result['code'] == 200) {
             if (isset($result['result']['access_token'])) {
                 $this->storage->storeAccessToken($this->client_id, $this->client_secret, $result['result']['access_token'], $result['result']['expires_in']);

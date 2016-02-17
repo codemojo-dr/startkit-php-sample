@@ -23,7 +23,7 @@ require_once __DIR__ . '/../config/codemojo.php';
  */
 $authenticationService = new AuthenticationService(CLIENT_ID, CLIENT_SECRET, Endpoints::LOCAL, function($type, $error){
    // Log the error / Show the the appropriate error messages for DEBUG purposes
-    die("Error: " . $error);
+    die("Error: " . $type . ": " . $error);
 });
 
 $loyaltyService = new \CodeMojo\Client\Services\LoyaltyService($authenticationService);

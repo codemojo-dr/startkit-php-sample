@@ -63,7 +63,7 @@ $history = $loyaltyService->getWalletService()->getTransactionDetailsForUser(get
                         <td></td>
                         <td><?php echo $item['meta'] ?></td>
                         <td><?php echo $item['value'] > 0 ? "Cashback added" : "Redeemed" ?></td>
-                        <td><?php echo abs($item['value']) ?> Rs</td>
+                        <td><?php echo abs($item['value']) ?> $</td>
                         <td><?php echo date("d-M-Y g:i a",strtotime($item['timestamp'])) ?></td>
                         <td><?php echo isset($item['expiry'])?date("d-M-Y g:i a",strtotime($item['expiry'])):'' ?></td>
                     </tr>
