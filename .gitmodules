@@ -1,3 +1,0 @@
-[submodule "sdk"]
-	path = sdk
-	url = https://github.com/codemojo-dr/startkit-php-sdk.git
