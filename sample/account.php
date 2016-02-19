@@ -43,9 +43,9 @@ $loyalty_details = $loyaltyService->getUserBrief(getUserID());
             <h3>Hello <?php echo getUserID() ?>, </h3>
             <p>First name: Name</p>
             <p>Phone: +91 999 999 99</p>
-            <p>Your Wallet Balance is <?php echo round($loyalty_details['balance']); ?> Rs</p>
             <p>Your Tier: <?php echo $loyalty_details['tier'] ?></p>
-            <p>Cashback received so far: <?php echo $loyalty_details['accumulated'] ?> Rs</p>
+            <p>Cashback received so far: $<?php echo $loyalty_details['accumulated'] ?></p>
+            <p>Your Wallet Balance is $<?php echo round($loyalty_details['balance']); ?></p>
         </div>
 
     </div>

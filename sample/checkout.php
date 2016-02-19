@@ -64,7 +64,7 @@ if(count($_POST) > 0){
 
         unset($_SESSION['cart']);
 
-        die("Success! Redeemed {$redeem} Rs from wallet. You will be doing the payment stuffs here for {$discounted_price} Rs instead of " . $checkout_price . " Rs ...");
+        die("Success! Redeemed $ {$redeem} from wallet. You will be doing the payment stuffs here for $ {$discounted_price} instead of $" . $checkout_price . " ...");
     }else{
         /*
          * User has choosen not to redeem, so lets add cashback
@@ -77,7 +77,7 @@ if(count($_POST) > 0){
 
         unset($_SESSION['cart']);
 
-        die("Success! Added cashback to wallet. You will be doing the payment stuffs here for {$checkout_price} Rs");
+        die("Success! Added cashback to wallet. You will be doing the payment stuffs here for ${$checkout_price}");
     }
 
 /*
