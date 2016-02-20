@@ -77,7 +77,7 @@ if(count($_POST) > 0){
 
         unset($_SESSION['cart']);
 
-        die("Success! Added cashback to wallet. You will be doing the payment stuffs here for ${$checkout_price}");
+        die("Success! Added cashback to wallet. You will be doing the payment stuffs here for $ {$checkout_price}");
     }
 
 /*
@@ -146,7 +146,7 @@ if(count($_POST) > 0){
                     <input name="redeem" type="text" class="form-control" max="<?php echo $maximumRedemption ?>" placeholder="Redeem from wallet" />
                     <p class="alert alert-success alert-dismissable col-md-6">You will get a cashback of <?php echo $reward_points['award'] ?> $</p>
                     <?php if($balance > 0): ?>
-                        <p class="alert alert-danger alert-dismissable col-md-6">You can redeem maximum of <?php echo $maximumRedemption?> $</p>
+                        <p class="alert alert-danger alert-dismissable col-md-6">You can redeem maximum of <?php echo $balance > $maximumRedemption ? $maximumRedemption : $balance ?> $</p>
                     <?php else: ?>
                         <p>You do not have any balance in your wallet yet!</p>
                     <?php endif; ?>
