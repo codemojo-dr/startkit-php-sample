@@ -21,7 +21,7 @@ require_once __DIR__ . '/../config/codemojo.php';
 /*
  * Initialize the core services
  */
-$authenticationService = new AuthenticationService(CLIENT_ID, CLIENT_SECRET, Endpoints::SANDBOX, function($type, $error){
+$authenticationService = new AuthenticationService(CLIENT_ID, CLIENT_SECRET, Endpoints::ENV_SANDBOX, function($type, $error){
    // Log the error / Show the the appropriate error messages for DEBUG purposes
     die("Error: " . $type . ": " . $error);
 });
