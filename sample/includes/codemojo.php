@@ -14,9 +14,11 @@
 use CodeMojo\Client\Endpoints;
 use CodeMojo\Client\Services\AuthenticationService;
 
-require_once __DIR__ . '/../../sdk/src/autoload.php';
-require_once 'helper.php';
 require_once __DIR__ . '/../config/codemojo.php';
+require_once 'helper.php';
+
+// Codemojo autoloader
+require_once __DIR__ . '/../../sdk/src/autoload.php';
 
 /*
  * Initialize the core services

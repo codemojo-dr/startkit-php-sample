@@ -19,11 +19,6 @@ $cartItems = getCart();
 $maximumRedemption = $loyaltyService->maximumRedemption(getUserID(), calculateCartPrice());
 
 /*
- * Get the Balance in the users wallet
- */
-$balance = $loyaltyService->getBalance(getUserID());
-
-/*
  * Calculate how much points will the user be getting for this transaction
  */
 $reward_points = $loyaltyService->calculateLoyaltyPoints(getUserID(), calculateCartPrice());
@@ -145,10 +140,10 @@ if(count($_POST) > 0){
                 <form method="post">
                     <input name="redeem" type="text" class="form-control" max="<?php echo $maximumRedemption ?>" placeholder="Redeem from wallet" />
                     <p class="alert alert-success alert-dismissable col-md-6">You will get a cashback of <?php echo $reward_points['award'] ?> $</p>
-                    <?php if($balance > 0): ?>
-                        <p class="alert alert-danger alert-dismissable col-md-6">You can redeem maximum of <?php echo $balance > $maximumRedemption ? $maximumRedemption : $balance ?> $</p>
+                    <?php if($maximumRedemption > 0): ?>
+                        <p class="alert alert-danger alert-dismissable col-md-6">You can redeem maximum of <?php echo $maximumRedemption ?> $</p>
                     <?php else: ?>
-                        <p>You do not have any balance in your wallet yet!</p>
+                        <p>You do not have any balance in your wallet!</p>
                     <?php endif; ?>
                     <input type="submit" class="btn btn-success" value="Checkout" />
                 </form>
