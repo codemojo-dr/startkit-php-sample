@@ -7,7 +7,7 @@ require_once 'includes/codemojo.php';
 /*
  * Get the transaction history
  */
-$history = $loyaltyService->getWalletService()->getTransactionDetailsForUser(getUserID());
+$history = $loyaltyService->getWalletService()->getTransactionDetailsForUser(getUserID(),10, null, (int) @$_GET['page']);
 
 ?><!DOCTYPE html>
 <html lang="en">
@@ -68,6 +68,13 @@ $history = $loyaltyService->getWalletService()->getTransactionDetailsForUser(get
                         <td><?php echo isset($item['expiry'])?date("d-M-Y g:i a",strtotime($item['expiry'])):'' ?></td>
                     </tr>
                 <?php endforeach; ?>
+                <tr>
+                    <td colspan="6">
+                    <?php for($i = 1; $i <= $history->totalPages(); $i++): ?>
+                        <a href="?page=<?php echo $i ?>"><?php echo $i ?></a> &nbsp;| &nbsp;
+                    <?php endfor; ?>
+                    </td>
+                </tr>
                 </tbody>
             </table>
         </div>
