@@ -47,7 +47,7 @@ if(count($_POST) > 0){
         $transaction_id = time();
 
         try {
-            $loyaltyService->redeem(getUserID(), $redeem, calculateCartPrice(), null, "Redeemed for Order ID #" . $transaction_id);
+            $loyaltyService->redeem(getUserID(), $redeem, calculateCartPrice(), -1, null, null, $transaction_id,"Redeemed for Order ID #" . $transaction_id);
         } catch (\CodeMojo\Client\Exceptions\BalanceExhaustedException $e) {
             die('Not enough balance! Balance has been exhausted');
         }
@@ -68,11 +68,13 @@ if(count($_POST) > 0){
         // You can associate a actual Transaction ID. We are using a random one here
         $transaction_id = time();
 
-        $loyaltyService->addLoyaltyPoints(getUserID(), $checkout_price, null, 30, $transaction_id, "Cashback for Order ID #" . $transaction_id);
+        if($loyaltyService->addLoyaltyPoints(getUserID(), $checkout_price, null, null, 30, $transaction_id, "Cashback for Order ID #" . $transaction_id)){
+            unset($_SESSION['cart']);
+            die("Success! Added cashback to wallet. You will be doing the payment stuffs here for $ {$checkout_price}");
+        }else{
+            die('Some error adding cashback');
+        }
 
-        unset($_SESSION['cart']);
-
-        die("Success! Added cashback to wallet. You will be doing the payment stuffs here for $ {$checkout_price}");
     }
 
 /*

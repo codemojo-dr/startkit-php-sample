@@ -13,6 +13,7 @@
  */
 use CodeMojo\Client\Endpoints;
 use CodeMojo\Client\Services\AuthenticationService;
+use CodeMojo\Client\Services\LoyaltyService;
 
 require_once __DIR__ . '/../config/codemojo.php';
 require_once 'helper.php';
@@ -28,7 +29,7 @@ $authenticationService = new AuthenticationService(CLIENT_ID, CLIENT_SECRET, End
     die("Error: " . $type . ": " . $error);
 });
 
-$loyaltyService = new \CodeMojo\Client\Services\LoyaltyService($authenticationService);
+$loyaltyService = new LoyaltyService($authenticationService);
 
 
 
