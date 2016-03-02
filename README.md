@@ -14,5 +14,7 @@ Copy the project to your `localhost` root
 
 Access the sample using your localhost url
 
-#### 3. Login
+#### 3. Update config & Login
+Open the `config/codemojo.php` file and update the `CLIENT_ID` and `CLIENT_SECRET` with the keys you got from the dashboard
+
 You can use any email/username & password to login to the sample
