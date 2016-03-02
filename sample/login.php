@@ -18,7 +18,7 @@ if(count($_POST) > 0) {
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Signin Template for Bootstrap</title>
+    <title>Signin | Codemojo sample</title>
 
     <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -41,6 +41,9 @@ if(count($_POST) > 0) {
         <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
     </form>
 
+    <p class="text-center alert alert-warning col-md-6 col-md-offset-3">
+        NOTE: Please update the config/codemojo.php with your App keys
+    </p>
 </div> <!-- /container -->
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
