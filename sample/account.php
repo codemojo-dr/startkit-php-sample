@@ -8,6 +8,11 @@ require_once 'includes/codemojo.php';
  */
 $loyalty_details = $loyaltyService->getUserBrief(getUserID());
 
+/*
+ * Get the referral code of the user
+ */
+$referralCode = $referralService->getReferralCode(getUserID());
+    
 ?><!DOCTYPE html>
 <html lang="en">
 <head>
@@ -46,6 +51,8 @@ $loyalty_details = $loyaltyService->getUserBrief(getUserID());
             <p>Your Tier: <?php echo $loyalty_details['tier'] ?></p>
             <p>Cashback received so far: $<?php echo $loyalty_details['accumulated'] ?></p>
             <p>Your Wallet Balance is $<?php echo round($loyalty_details['balance']); ?></p>
+            <br/>
+            <p>Your Referral code is <b><?php echo $referralCode; ?></b></p>
         </div>
 
     </div>
