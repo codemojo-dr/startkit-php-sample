@@ -28,7 +28,7 @@ require_once __DIR__ . '/../../sdk/src/autoload.php';
  */
 $authenticationService = new AuthenticationService(CLIENT_ID, CLIENT_SECRET, Endpoints::ENV_SANDBOX, function($type, $error){
    // Log the error / Show the the appropriate error messages for DEBUG purposes
-    die("Error: " . $type . ": " . $error);
+    echo("Error: " . $type . ": " . $error);
 });
 
 $loyaltyService = new LoyaltyService($authenticationService);

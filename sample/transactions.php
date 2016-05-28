@@ -43,7 +43,7 @@ $history = $loyaltyService->getWalletService()->getTransactionDetailsForUser(get
 
     <div class="starter-template">
 
-        <h1>Checkout</h1>
+        <h3>Transaction history for <?php echo getUserID()?></h3>
 
         <div class="table-responsive">
             <table class="table table-striped">

@@ -6,6 +6,11 @@
  */
 session_start();
 
+if(isset($_GET['logout'])){
+    session_destroy();
+    session_start();
+}
+
 require_once 'helper.php';
 
 if(!isset($_SESSION['email'])){

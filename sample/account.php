@@ -4,6 +4,19 @@ require_once 'includes/login-check.php';
 require_once 'includes/codemojo.php';
 
 /*
+ * Validate referral
+ */
+
+    if($_SERVER['REQUEST_METHOD'] == 'POST'){
+        $code = $_POST['referral'];
+        if($referralService->useReferralCode(getUserID(), $code)){
+            header("Location: transactions.php");
+            exit;
+        } else {
+            // Invalid
+        }
+    }
+/*
  * Get a brief snapshot about the user's loyalty status
  */
 $loyalty_details = $loyaltyService->getUserBrief(getUserID());
@@ -11,8 +24,8 @@ $loyalty_details = $loyaltyService->getUserBrief(getUserID());
 /*
  * Get the referral code of the user
  */
-$referralCode = $referralService->getReferralCode(getUserID());
-    
+$referralCode = strtoupper($referralService->getReferralCode(getUserID()));
+
 ?><!DOCTYPE html>
 <html lang="en">
 <head>
@@ -48,11 +61,17 @@ $referralCode = $referralService->getReferralCode(getUserID());
             <h3>Hello <?php echo getUserID() ?>, </h3>
             <p>First name: Name</p>
             <p>Phone: +91 999 999 99</p>
-            <p>Your Tier: <?php echo $loyalty_details['tier'] ?></p>
-            <p>Cashback received so far: $<?php echo $loyalty_details['accumulated'] ?></p>
-            <p>Your Wallet Balance is $<?php echo round($loyalty_details['balance']); ?></p>
+            <p>Your Tier: <?php echo @$loyalty_details['tier'] ?></p>
+            <p>Cashback received so far: $<?php echo @$loyalty_details['accumulated'] ?></p>
+            <p>Your Wallet Balance is $<?php echo round(@$loyalty_details['balance']); ?></p>
             <br/>
             <p>Your Referral code is <b><?php echo $referralCode; ?></b></p>
+            <br/>
+            <form method="post">
+                <p>Have a referral code? Enter here</p>
+                <input type="text" placeholder="Referral code" name="referral" />
+                <input type="submit" value="Go" />
+            </form><br/>
         </div>
 
     </div>

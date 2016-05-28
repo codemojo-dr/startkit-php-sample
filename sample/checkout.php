@@ -31,6 +31,7 @@ if(count($_POST) > 0){
     $redeem = (int) $_POST['redeem'];
     $checkout_price = calculateCartPrice();
 
+    $linkBack = "<br/><br/><a href='/'>Please click here to go back</a>";
     /*
      * In this specific scenario, we will allow the user to either get cashback or redeem; But not both
      */
@@ -49,7 +50,7 @@ if(count($_POST) > 0){
         try {
             $loyaltyService->redeem(getUserID(), $redeem, calculateCartPrice(), -1, null, null, $transaction_id,"Redeemed for Order ID #" . $transaction_id);
         } catch (\CodeMojo\Client\Exceptions\BalanceExhaustedException $e) {
-            die('Not enough balance! Balance has been exhausted');
+            die('Not enough balance! Balance has been exhausted' . $linkBack);
         }
 
         /*
@@ -58,8 +59,8 @@ if(count($_POST) > 0){
         $discounted_price = $checkout_price - $redeem;
 
         unset($_SESSION['cart']);
-
-        die("Success! Redeemed $ {$redeem} from wallet. You will be doing the payment stuffs here for $ {$discounted_price} instead of $" . $checkout_price . " ...");
+        $referralService->markActivityComplete(getUserID());
+        die("Success! Redeemed $ {$redeem} from wallet. You will be doing the payment stuffs here for $ {$discounted_price} instead of $" . $checkout_price . " ..." . $linkBack);
     }else{
         /*
          * User has choosen not to redeem, so lets add cashback
@@ -70,12 +71,14 @@ if(count($_POST) > 0){
 
         if($loyaltyService->addLoyaltyPoints(getUserID(), $checkout_price, null, null, 30, $transaction_id, "Cashback for Order ID #" . $transaction_id)){
             unset($_SESSION['cart']);
-            die("Success! Added cashback to wallet. You will be doing the payment stuffs here for $ {$checkout_price}");
+            $referralService->markActivityComplete(getUserID());
+            die("Success! Added cashback to wallet. You will be doing the payment stuffs here for $ {$checkout_price}" . $linkBack);
         }else{
-            die('Some error adding cashback');
+            die('Some error adding cashback' . $linkBack);
         }
 
     }
+
 
 /*
  * ===================================================================================
