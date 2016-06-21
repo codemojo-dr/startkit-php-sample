@@ -27,7 +27,6 @@ $walletBalance = $walletService->getBalance(getUserID());
  */
 $referralCode = strtoupper($referralService->getReferralCode(getUserID()));
 $gamificationService->captureAction(getUserID(), 'viewed-account-page');
-
 $gamerStatus = $gamificationService->getUserStatus(getUserID());
 
 ?><!DOCTYPE html>
@@ -71,6 +70,12 @@ $gamerStatus = $gamificationService->getUserStatus(getUserID());
             <p>Your Badge is : <?php echo @$gamerStatus['badge'] ?></p>
             <p><img width="28" src="/images/gold.png"> <?php echo round(@$walletBalance['slot2']['raw']); ?> pts <img src="/images/blue.png"> <?php echo round(@$walletBalance['slot3']['raw']); ?> pts</p>
             <br/>
+            <span>Badges Earned</span>
+            <ul>
+                <?php foreach ($gamerStatus['achievements'] as $id => $content): ?>
+                    <li><b><?php echo ucwords($id); ?></b>: <?php echo $content['total'] ?></li>
+                <?php endforeach; ?>
+            </ul>
             <iframe style="width: 500px; height: 200px;" src="includes/embed.php?id=<?php echo getUserID() ?>" frameborder="0"></iframe>
             <br/>
             <form method="post">
