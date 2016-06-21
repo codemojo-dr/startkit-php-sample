@@ -42,6 +42,7 @@ if(count($_POST) > 0) {
     </form>
 
     <p class="text-center alert alert-warning col-md-6 col-md-offset-3">
+        Use any email &amp; password to login<br/>
         NOTE: Please update the config/codemojo.php with your App keys
     </p>
 </div> <!-- /container -->

@@ -29,7 +29,7 @@ class Endpoints
     const BASE_WALLET = "/services/wallet";
 
     const WALLET_CREDITS = "/credits";
-    const WALLET_CREDITS_BALANCE = "/credits/balance/%s?transaction_id=%d";
+    const WALLET_CREDITS_BALANCE = "/credits/balance/%s?transaction_type=%d";
 
     const WALLET_TRANSACTIONS_ALL = "/transactions/%d";
     const WALLET_TRANSACTIONS_USER = "/transactions/%s/%d";
@@ -66,4 +66,10 @@ class Endpoints
      */
     const BASE_META = "/services/meta";
     const META = "";
+
+    /*
+     * DataSync Endpoints
+     */
+    const BASE_DATASYNC = "/services/data";
+    const DATASYNC_USER = "/user";
 }

@@ -47,7 +47,7 @@ class ReferralService
     /**
      * @param $user_id
      * @param $referral_code
-     * @return boolean
+     * @return array
      * @throws \CodeMojo\Client\Http\InvalidArgumentException
      * @throws \CodeMojo\OAuth2\Exception
      */

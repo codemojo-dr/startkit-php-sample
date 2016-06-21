@@ -62,8 +62,8 @@ $history = $loyaltyService->getWalletService()->getTransactionDetailsForUser(get
                     <tr>
                         <td></td>
                         <td><?php echo $item['meta'] ?></td>
-                        <td><?php echo $item['value'] > 0 ? "Cashback added" : "Redeemed" ?></td>
-                        <td><?php echo abs($item['value']) ?> $</td>
+                        <td><?php echo $item['value'] > 0 ? ($item['transaction_type'] == 3 ? "Engagement points": "Cashback added") : "Redeemed" ?></td>
+                        <td><?php echo abs($item['value']) . ($item['transaction_type'] == 2 || $item['transaction_type'] == -2 ? ' Gold points': ' Blue points' )?> </td>
                         <td><?php echo date("d-M-Y g:i a",strtotime($item['timestamp'])) ?></td>
                         <td><?php echo isset($item['expiry'])?date("d-M-Y g:i a",strtotime($item['expiry'])):'' ?></td>
                     </tr>

@@ -7,24 +7,28 @@ require_once 'includes/codemojo.php';
  * Validate referral
  */
 
-    if($_SERVER['REQUEST_METHOD'] == 'POST'){
-        $code = $_POST['referral'];
-        if($referralService->useReferralCode(getUserID(), $code)){
-            header("Location: transactions.php");
-            exit;
-        } else {
-            // Invalid
-        }
+if($_SERVER['REQUEST_METHOD'] == 'POST'){
+    $code = $_POST['referral'];
+    if($referralService->useReferralCode(getUserID(), $code)){
+        header("Location: transactions.php");
+        exit;
+    } else {
+        // Invalid
     }
+}
 /*
  * Get a brief snapshot about the user's loyalty status
  */
 $loyalty_details = $loyaltyService->getUserBrief(getUserID());
 
+$walletBalance = $walletService->getBalance(getUserID());
 /*
  * Get the referral code of the user
  */
 $referralCode = strtoupper($referralService->getReferralCode(getUserID()));
+$gamificationService->captureAction(getUserID(), 'viewed-account-page');
+
+$gamerStatus = $gamificationService->getUserStatus(getUserID());
 
 ?><!DOCTYPE html>
 <html lang="en">
@@ -62,16 +66,19 @@ $referralCode = strtoupper($referralService->getReferralCode(getUserID()));
             <p>First name: Name</p>
             <p>Phone: +91 999 999 99</p>
             <p>Your Tier: <?php echo @$loyalty_details['tier'] ?></p>
-            <p>Cashback received so far: $<?php echo @$loyalty_details['accumulated'] ?></p>
-            <p>Your Wallet Balance is $<?php echo round(@$loyalty_details['balance']); ?></p>
+            <p>Points/CB received so far: <?php echo @$loyalty_details['accumulated'] ?> pts</p>
+            <p>Your Wallet Balance is $<?php echo round(@$walletBalance['total']); ?></p>
+            <p>Your Badge is : <?php echo @$gamerStatus['badge'] ?></p>
+            <p><img width="28" src="/images/gold.png"> <?php echo round(@$walletBalance['slot2']['raw']); ?> pts <img src="/images/blue.png"> <?php echo round(@$walletBalance['slot3']['raw']); ?> pts</p>
             <br/>
-            <p>Your Referral code is <b><?php echo $referralCode; ?></b></p>
+            <iframe style="width: 500px; height: 200px;" src="includes/embed.php?id=<?php echo getUserID() ?>" frameborder="0"></iframe>
             <br/>
             <form method="post">
                 <p>Have a referral code? Enter here</p>
                 <input type="text" placeholder="Referral code" name="referral" />
                 <input type="submit" value="Go" />
             </form><br/>
+
         </div>
 
     </div>

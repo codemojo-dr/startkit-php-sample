@@ -13,6 +13,8 @@
  */
 use CodeMojo\Client\Endpoints;
 use CodeMojo\Client\Services\AuthenticationService;
+use CodeMojo\Client\Services\DataSyncService;
+use CodeMojo\Client\Services\GamificationService;
 use CodeMojo\Client\Services\LoyaltyService;
 use CodeMojo\Client\Services\ReferralService;
 use CodeMojo\Client\Services\WalletService;
@@ -37,6 +39,9 @@ $walletService = new WalletService($authenticationService);
 
 $referralService = new ReferralService($authenticationService);
 
+$dataSync = new DataSyncService($authenticationService);
+
+$gamificationService = new GamificationService($authenticationService);
 
 
 

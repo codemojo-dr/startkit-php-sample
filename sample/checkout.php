@@ -31,7 +31,7 @@ if(count($_POST) > 0){
     $redeem = (int) $_POST['redeem'];
     $checkout_price = calculateCartPrice();
 
-    $linkBack = "<br/><br/><a href='/'>Please click here to go back</a>";
+    $linkBack = "<br/><br/><a href='/index.php'>Please click here to go back</a>";
     /*
      * In this specific scenario, we will allow the user to either get cashback or redeem; But not both
      */
@@ -60,7 +60,7 @@ if(count($_POST) > 0){
 
         unset($_SESSION['cart']);
         $referralService->markActivityComplete(getUserID());
-        die("Success! Redeemed $ {$redeem} from wallet. You will be doing the payment stuffs here for $ {$discounted_price} instead of $" . $checkout_price . " ..." . $linkBack);
+        die("<br/>Success! Redeemed {$redeem} points from wallet. You will be doing the payment stuffs here for $ {$discounted_price} instead of $" . $checkout_price . " ..." . $linkBack);
     }else{
         /*
          * User has choosen not to redeem, so lets add cashback
@@ -72,19 +72,19 @@ if(count($_POST) > 0){
         if($loyaltyService->addLoyaltyPoints(getUserID(), $checkout_price, null, null, 30, $transaction_id, "Cashback for Order ID #" . $transaction_id)){
             unset($_SESSION['cart']);
             $referralService->markActivityComplete(getUserID());
-            die("Success! Added cashback to wallet. You will be doing the payment stuffs here for $ {$checkout_price}" . $linkBack);
+            die("<br/>Success! Added cashback to wallet. You will be doing the payment stuffs here for $ {$checkout_price}" . $linkBack);
         }else{
-            die('Some error adding cashback' . $linkBack);
+            die('<br/>Some error adding cashback' . $linkBack);
         }
 
     }
 
 
-/*
- * ===================================================================================
- *                 End of CodeMojo Integration
- * ===================================================================================
- */
+    /*
+     * ===================================================================================
+     *                 End of CodeMojo Integration
+     * ===================================================================================
+     */
 
 
 }
@@ -144,9 +144,9 @@ if(count($_POST) > 0){
             <div class="col-md-8 text-right pull-right">
                 <form method="post">
                     <input name="redeem" type="text" class="form-control" max="<?php echo $maximumRedemption ?>" placeholder="Redeem from wallet" />
-                    <p class="alert alert-success alert-dismissable col-md-6">You will get a cashback of <?php echo $reward_points['award'] ?> $</p>
+                    <p class="alert alert-success alert-dismissable col-md-6">You will get <img width="24" src="images/gold.png" /> <?php echo $reward_points['award'] ?> points</p>
                     <?php if($maximumRedemption > 0): ?>
-                        <p class="alert alert-danger alert-dismissable col-md-6">You can redeem maximum of <?php echo $maximumRedemption ?> $</p>
+                        <p class="alert alert-danger alert-dismissable col-md-6">You can redeem maximum of <?php echo $maximumRedemption ?>$</p>
                     <?php else: ?>
                         <p>You do not have any balance in your wallet!</p>
                     <?php endif; ?>
