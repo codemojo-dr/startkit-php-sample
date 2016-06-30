@@ -11,6 +11,10 @@ if(isset($_GET['logout'])){
     session_start();
 }
 
+if(isset($_GET['referrer'])){
+    $_SESSION['referrer'] = $_GET['referrer'];
+}
+
 require_once 'helper.php';
 
 if(!isset($_SESSION['email'])){

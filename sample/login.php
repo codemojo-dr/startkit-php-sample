@@ -5,6 +5,12 @@ session_start();
 // Login process section
 if(count($_POST) > 0) {
     $_SESSION['email'] = $_POST['email'];
+
+    // Do the referral signup stuff here
+    if(isset($_SESSION['referrer']) && !empty($_SESSION['referrer'])){
+        require_once 'includes/codemojo.php';
+        $referralService->useReferralCode(getUserID(), $_SESSION['referrer']);
+    }
 }
 
 ?>

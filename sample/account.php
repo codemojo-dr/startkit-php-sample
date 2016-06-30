@@ -22,11 +22,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 $loyalty_details = $loyaltyService->getUserBrief(getUserID());
 
 $walletBalance = $walletService->getBalance(getUserID());
-/*
- * Get the referral code of the user
- */
-$referralCode = strtoupper($referralService->getReferralCode(getUserID()));
-$gamificationService->captureAction(getUserID(), 'viewed-account-page');
+
 $gamerStatus = $gamificationService->getUserStatus(getUserID());
 
 ?><!DOCTYPE html>

@@ -6,7 +6,9 @@ require_once 'codemojo.php';
 /*
  * Get the referral code of the user
  */
-$referralCode = strtoupper($referralService->getReferralCode($_GET['id']));
+$referral = $referralService->getReferralCode($_GET['id']);
+$code = strtoupper($referral['code']);
+$url = $referral['url'];
 
 ?><html>
 <head>
@@ -29,7 +31,7 @@ $referralCode = strtoupper($referralService->getReferralCode($_GET['id']));
 <body>
 <p style="text-align: center; margin-bottom: 0">my referral code</p>
 <h2 class="referral">
-    <a target="_blank" href="http://lh-sample:8888/signup/?code=<?php echo $referralCode ?>"><?php echo $referralCode ?></a>
+    <a target="_blank" href="<?php echo $url ?>"><?php echo $code ?></a>
 </h2>
 
 <h3>Refer &amp; Earn</h3>

@@ -60,18 +60,21 @@ class GamificationService
     /**
      * @param $user_id
      * @param $action_id
+     * @param $category_id
      * @return bool
+     * @throws \CodeMojo\Client\Http\InvalidArgumentException
+     * @throws \CodeMojo\OAuth2\Exception
      */
-    public function addAchievements($user_id, $action_id){
+    public function addAchievements($user_id, $action_id, $category_id = null){
         $url = $this->authenticationService->getServerEndPoint() . Endpoints::VERSION . Endpoints::BASE_GAMIFICATION . Endpoints::GAMIFICATION_ACHIEVEMENTS;
 
         $params = array(
-            "customer_id" => $user_id, "action_id" => $action_id
+            "customer_id" => $user_id, "action_id" => $action_id, "id" => $category_id
         );
 
         $result = $this->authenticationService->getTransport()->fetch($url, $params,'PUT', array(), 0);
 
-        return $result['results'];
+        return $result['code'] == 200 ;
     }
 
     /**
