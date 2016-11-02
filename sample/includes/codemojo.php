@@ -28,7 +28,7 @@ require_once __DIR__ . '/../../sdk/src/autoload.php';
 /*
  * Initialize the core services
  */
-$authenticationService = new AuthenticationService(CLIENT_ID, CLIENT_SECRET, Endpoints::ENV_SANDBOX, function($type, $error){
+$authenticationService = new AuthenticationService(CLIENT_ID, CLIENT_SECRET, Endpoints::ENV_PRODUCTION, function($type, $error){
    // Log the error / Show the the appropriate error messages for DEBUG purposes
     echo("Error: " . $type . ": " . $error);
 });
