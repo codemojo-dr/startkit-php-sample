@@ -17,6 +17,7 @@ use CodeMojo\Client\Services\DataSyncService;
 use CodeMojo\Client\Services\GamificationService;
 use CodeMojo\Client\Services\LoyaltyService;
 use CodeMojo\Client\Services\ReferralService;
+use CodeMojo\Client\Services\RewardsService;
 use CodeMojo\Client\Services\WalletService;
 
 require_once __DIR__ . '/../config/codemojo.php';
@@ -42,6 +43,8 @@ $referralService = new ReferralService($authenticationService);
 $dataSync = new DataSyncService($authenticationService);
 
 $gamificationService = new GamificationService($authenticationService);
+
+$rewardsService = new RewardsService($authenticationService, "a673fca0-91f9-11e6-a2dd-1b943448738e");
 
 
 

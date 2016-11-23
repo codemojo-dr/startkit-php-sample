@@ -7,7 +7,8 @@ require_once 'includes/codemojo.php';
 /*
  * Get the transaction history
  */
-$history = $loyaltyService->getWalletService()->getTransactionDetailsForUser(getUserID(),10, null, (int) @$_GET['page']);
+$rewards = $rewardsService->getAvailableRewards(getUserID(),array("locale" => "in"));
+
 
 ?><!DOCTYPE html>
 <html lang="en">
@@ -43,38 +44,29 @@ $history = $loyaltyService->getWalletService()->getTransactionDetailsForUser(get
 
     <div class="starter-template">
 
-        <h3>Transaction history for <?php echo getUserID()?></h3>
+        <h3>Available rewards</h3>
 
         <div class="table-responsive">
             <table class="table table-striped">
                 <thead>
                 <tr>
                     <th>#</th>
-                    <th>Description</th>
-                    <th>Type</th>
+                    <th>Brand</th>
+                    <th>Reward</th>
                     <th>Value</th>
-                    <th>Time</th>
                     <th>Expires in</th>
                 </tr>
                 </thead>
                 <tbody>
-                <?php foreach ($history->results() as $item): ?>
+                <?php foreach ($rewards as $item): ?>
                     <tr>
-                        <td></td>
-                        <td><?php echo $item['meta'] ?></td>
-                        <td><?php echo $item['value'] > 0 ? ($item['transaction_type'] == 3 ? "Engagement points": "Cashback added") : "Redeemed" ?></td>
-                        <td><?php echo abs($item['value']) . ($item['transaction_type'] == 2 || $item['transaction_type'] == -2 ? ' Gold points': ' Blue points' )?> </td>
-                        <td><?php echo date("d-M-Y g:i a",strtotime($item['timestamp'])) ?></td>
-                        <td><?php echo isset($item['expiry'])?date("d-M-Y g:i a",strtotime($item['expiry'])):'' ?></td>
+                        <td><img src="<?php echo $item['logo'] ?>" width="48" /></td>
+                        <td><?php echo $item['brand_name'] ?></td>
+                        <td><?php echo $item['offer'] ?></td>
+                        <td><?php echo $item['value_formatted'] ?></td>
+                        <td><?php echo $item['valid_till'] ?></td>
                     </tr>
                 <?php endforeach; ?>
-                <tr>
-                    <td colspan="6">
-                        <?php for($i = 1; $i <= $history->totalPages(); $i++): ?>
-                            <a href="?page=<?php echo $i ?>"><?php echo $i ?></a> &nbsp;| &nbsp;
-                        <?php endfor; ?>
-                    </td>
-                </tr>
                 </tbody>
             </table>
         </div>
